@@ -1,0 +1,22 @@
+{
+    "name": "sunnysideup/title_dataobject",
+    "type": "silverstripe-module",
+    "description": "An abstract like class for creating Title only Data Objects in a simple and efficient manner to for example add a category to Business.",
+    "keywords": ["Silverstripe", "CMS", "DataObject", "Title", "Category", "Tag", "Categorisation", "Taxonomy"],
+    "license": "Sunny Side Up (BSD-3-Clause and CUSTOM)",
+    "authors":[
+        {
+            "name": "Nicolaas Francken",
+            "homepage": "https://github.com/sunnysideup",
+            "email" : "modules@sunnysideup.co.nz",
+            "role" : "lead developer"
+        }
+    ],
+    "require":{
+        "silverstripe/framework": "^3.4"
+    },
+    "extra": {
+        "installer-name": "title_dataobject"
+    }
+
+}
