@@ -20,30 +20,48 @@ class TitleDataObject extends DataObject {
     );
 
     /**
+     * to prevent racing conditions ...
+     *
+     * @var array
+     */
+    private static $_cache = array();
+
+    /**
      * see README.md for usage ...
-     * 
+     *
      * @param string $title
+     * @param bool $showDBAlterationMessage
      * @return DataObject
-     */ 
-    public static function find_or_create($title, $dbMessage = false)
+     */
+    public static function find_or_create($title, $showDBAlterationMessage = false)
     {
         $title = trim($title);
+        $titleToLower = strtolower(($title));
+        if(isset(self::$_cache[$titleToLower])) {
+            if($showDBAlterationMessage) {
+                DB::alteration_message('Found '.$className.' with Title = <strong>'.$title.'</strong>');
+            }            
+            return self::$_cache[$titleToLower];
+        }
         $className = get_called_class();
         if( ! $title) {
             return $className::create();
         }
-        $obj = $className::get()->where('LOWER("Title") =\''.Convert::raw2sql(strtolower($title)).'\'');
+        $obj = $className::get()->where('LOWER("Title") =\''.Convert::raw2sql($titleToLower).'\'');
 
         if($obj->count() == 0) {
-            if($dbMessage) {
+            if($showDBAlterationMessage) {
                 DB::alteration_message('Creating new '.$className.' with Title = <strong>'.$title.'</strong>', 'created');
             }
             $obj = $className::create();
         } else {
-            DB::alteration_message('Found '.$className.' with Title = <strong>'.$title.'</strong>');
+            if($showDBAlterationMessage) {
+                DB::alteration_message('Found '.$className.' with Title = <strong>'.$title.'</strong>');
+            }
             $obj = $obj->first();
         }
         $obj->Title = $title;
+        self::$_cache[$title] = $obj;
         $obj->write();
 
         return $obj;
