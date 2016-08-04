@@ -37,13 +37,15 @@ class TitleDataObject extends DataObject {
     {
         $title = trim($title);
         $titleToLower = strtolower(($title));
-        if(isset(self::$_cache[$titleToLower])) {
+        $className = get_called_class();
+        $key = $className.'_'.$titleToLower;
+        if(isset(self::$_cache[$key])) {
             if($showDBAlterationMessage) {
                 DB::alteration_message('Found '.$className.' with Title = <strong>'.$title.'</strong>');
-            }            
-            return self::$_cache[$titleToLower];
+            }
+            return self::$_cache[$key];
         }
-        $className = get_called_class();
+
         if( ! $title) {
             return $className::create();
         }
@@ -61,7 +63,7 @@ class TitleDataObject extends DataObject {
             $obj = $obj->first();
         }
         $obj->Title = $title;
-        self::$_cache[$title] = $obj;
+        self::$_cache[$key] = $obj;
         $obj->write();
 
         return $obj;
