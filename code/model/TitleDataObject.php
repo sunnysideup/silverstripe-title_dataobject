@@ -1,8 +1,8 @@
 <?php
 
 
-class TitleDataObject extends DataObject {
-
+class TitleDataObject extends DataObject
+{
     private static $indexes = array(
         'Title' => 'unique("Title, ClassName")'
     );
@@ -39,25 +39,25 @@ class TitleDataObject extends DataObject {
         $titleToLower = strtolower(($title));
         $className = get_called_class();
         $key = $className.'_'.$titleToLower;
-        if(isset(self::$_cache[$key])) {
-            if($showDBAlterationMessage) {
+        if (isset(self::$_cache[$key])) {
+            if ($showDBAlterationMessage) {
                 DB::alteration_message('Found '.$className.' with Title = <strong>'.$title.'</strong>');
             }
             return self::$_cache[$key];
         }
 
-        if( ! $title) {
+        if (! $title) {
             return $className::create();
         }
         $obj = $className::get()->where('LOWER("Title") =\''.Convert::raw2sql($titleToLower).'\'');
 
-        if($obj->count() == 0) {
-            if($showDBAlterationMessage) {
+        if ($obj->count() == 0) {
+            if ($showDBAlterationMessage) {
                 DB::alteration_message('Creating new '.$className.' with Title = <strong>'.$title.'</strong>', 'created');
             }
             $obj = $className::create();
         } else {
-            if($showDBAlterationMessage) {
+            if ($showDBAlterationMessage) {
                 DB::alteration_message('Found '.$className.' with Title = <strong>'.$title.'</strong>');
             }
             $obj = $obj->first();
@@ -68,5 +68,4 @@ class TitleDataObject extends DataObject {
 
         return $obj;
     }
-
 }

@@ -3,8 +3,9 @@
     "type": "silverstripe-module",
     "description": "An abstract like class for creating Title only Data Objects in a simple and efficient manner to for example add a category to Business.",
     "keywords": [
-        "Silverstripe",
+        "Silverstripe-CMS",
         "CMS",
+        "Silverstripe",
         "DataObject",
         "Title",
         "Category",
@@ -21,7 +22,8 @@
         }
     ],
     "require": {
-        "silverstripe/framework": "^3.4"
+        "silverstripe/framework": "~3.1",
+        "silverstripe/cms": "~3.1"
     },
     "extra": {
         "installer-name": "title_dataobject"
