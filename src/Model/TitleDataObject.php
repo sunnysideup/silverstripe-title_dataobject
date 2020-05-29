@@ -8,6 +8,13 @@ use SilverStripe\ORM\DB;
 
 class TitleDataObject extends DataObject
 {
+    /**
+     * to prevent racing conditions ...
+     *
+     * @var array
+     */
+    protected static $cache = [];
+
     private static $indexes = [
         'Title' => 'unique("Title, ClassName")',
     ];
@@ -27,18 +34,12 @@ class TitleDataObject extends DataObject
     ];
 
     /**
-     * to prevent racing conditions ...
-     *
-     * @var array
-     */
-    private static $_cache = [];
-
-    /**
      * see README.md for usage ...
      *
      * @param string $title
      * @param bool $showDBAlterationMessage
-     * @return DataObject
+     *
+     * @return TitleDataObject
      */
     public static function find_or_create(string $title, ?bool $showDBAlterationMessage = false)
     {
@@ -47,11 +48,11 @@ class TitleDataObject extends DataObject
 
         $className = static::class;
         $key = $className . '_' . $titleToLower;
-        if (isset(self::$_cache[$key])) {
+        if (isset(self::$cache[$key])) {
             if ($showDBAlterationMessage) {
                 DB::alteration_message('Found ' . $className . ' with Title = <strong>' . $title . '</strong>');
             }
-            return self::$_cache[$key];
+            return self::$cache[$key];
         }
 
         if (! $title) {
@@ -75,7 +76,7 @@ class TitleDataObject extends DataObject
             $obj = $obj->first();
         }
         $obj->Title = $title;
-        self::$_cache[$key] = $obj;
+        self::$cache[$key] = $obj;
         $obj->write();
 
         return $obj;
