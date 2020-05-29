@@ -69,3 +69,4 @@ class TitleDataObject extends DataObject
         return $obj;
     }
 }
+
