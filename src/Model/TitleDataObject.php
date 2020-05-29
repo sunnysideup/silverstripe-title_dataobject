@@ -1,5 +1,12 @@
 <?php
 
+namespace Sunnysideup\TitleDataObject\Model;
+
+use DataObject;
+use DB;
+use Convert;
+
+
 
 class TitleDataObject extends DataObject
 {
