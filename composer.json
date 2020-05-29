@@ -1,6 +1,6 @@
 {
     "name": "sunnysideup/title_dataobject",
-    "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
     "description": "An abstract like class for creating Title only Data Objects in a simple and efficient manner to for example add a category to Business.",
     "keywords": [
         "Silverstripe-CMS",
