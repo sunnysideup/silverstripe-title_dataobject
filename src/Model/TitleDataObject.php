@@ -2,9 +2,13 @@
 
 namespace Sunnysideup\TitleDataObject\Model;
 
-use DataObject;
-use DB;
-use Convert;
+
+
+
+use SilverStripe\ORM\DB;
+use SilverStripe\Core\Convert;
+use SilverStripe\ORM\DataObject;
+
 
 
 
