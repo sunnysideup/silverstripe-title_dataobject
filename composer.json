@@ -25,6 +25,8 @@
         "silverstripe/recipe-cms": "^4.4"
     },
     "extra": [],
+    "minimum-stability": "dev",
+    "prefer-stable": true,  
     "autoload": {
         "psr-4": {
             "Sunnysideup\\TitleDataObject\\": "src/"
