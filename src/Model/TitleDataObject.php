@@ -36,7 +36,6 @@ class TitleDataObject extends DataObject
     /**
      * see README.md for usage ...
      *
-     * @param string $title
      * @param bool $showDBAlterationMessage
      *
      * @return TitleDataObject
