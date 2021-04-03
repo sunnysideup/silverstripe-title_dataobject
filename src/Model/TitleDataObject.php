@@ -51,6 +51,7 @@ class TitleDataObject extends DataObject
             if ($showDBAlterationMessage) {
                 DB::alteration_message('Found ' . $className . ' with Title = <strong>' . $title . '</strong>');
             }
+
             return self::$cache[$key];
         }
 
@@ -60,7 +61,7 @@ class TitleDataObject extends DataObject
 
         $obj = $className::get()->where('LOWER("Title") =\'' . Convert::raw2sql($titleToLower) . '\'');
 
-        if ($obj->count() === 0) {
+        if (0 === $obj->count()) {
             if ($showDBAlterationMessage) {
                 DB::alteration_message(
                     'Creating new ' . $className . ' with Title = <strong>' . $title . '</strong>',
