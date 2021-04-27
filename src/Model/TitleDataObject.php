@@ -5,15 +5,17 @@ namespace Sunnysideup\TitleDataObject\Model;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
+use Sunnysideup\TitleDataObject\Traits\FindOrCreate;
 
 class TitleDataObject extends DataObject
 {
-    /**
-     * to prevent racing conditions ...
-     *
-     * @var array
-     */
-    protected static $cache = [];
+    use FindOrCreate;
+
+    private static $table_name = 'TitleDataObject';
+
+    private static $db = [
+        'Title' => 'Varchar(255)',
+    ];
 
     private static $indexes = [
         'Title' => 'unique("Title, ClassName")',
@@ -23,62 +25,6 @@ class TitleDataObject extends DataObject
         'Title' => 'PartialMatchFilter',
     ];
 
-    private static $default_sort = [
-        'Title' => 'ASC',
-    ];
+    // NOTE: we do not use default_sort, because that can't be overridden.
 
-    private static $table_name = 'TitleDataObject';
-
-    private static $db = [
-        'Title' => 'Varchar(255)',
-    ];
-
-    /**
-     * see README.md for usage ...
-     *
-     * @param bool $showDBAlterationMessage
-     *
-     * @return TitleDataObject
-     */
-    public static function find_or_create(string $title, ?bool $showDBAlterationMessage = false)
-    {
-        $title = trim($title);
-        $titleToLower = strtolower($title);
-
-        $className = static::class;
-        $key = $className . '_' . $titleToLower;
-        if (isset(self::$cache[$key])) {
-            if ($showDBAlterationMessage) {
-                DB::alteration_message('Found ' . $className . ' with Title = <strong>' . $title . '</strong>');
-            }
-
-            return self::$cache[$key];
-        }
-
-        if (! $title) {
-            return $className::create();
-        }
-
-        $obj = $className::get()->where('LOWER("Title") =\'' . Convert::raw2sql($titleToLower) . '\'');
-
-        if (0 === $obj->count()) {
-            if ($showDBAlterationMessage) {
-                DB::alteration_message(
-                    'Creating new ' . $className . ' with Title = <strong>' . $title . '</strong>',
-                    'created'
-                );
-            }
-            $obj = $className::create();
-        } else {
-            if ($showDBAlterationMessage) {
-                DB::alteration_message('Found ' . $className . ' with Title = <strong>' . $title . '</strong>');
-            }
-            $obj = $obj->first();
-        }
-        $obj->Title = $title;
-        self::$cache[$key] = $obj;
-        $obj->write();
-
-        return $obj;
-    }
 }
