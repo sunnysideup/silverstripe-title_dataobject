@@ -31,6 +31,9 @@ class TitleDataObject extends DataObject
 
     // NOTE: we do not use default_sort, because that can't be overridden.
     
+    /**
+     * This is here to improve export of has_one related objects that do not have a value. 
+     */
     public function CalculatedTitle(): string
     {
         return $this->Title ? $this->Title : '';
