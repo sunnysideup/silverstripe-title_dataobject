@@ -17,6 +17,10 @@ class TitleDataObject extends DataObject
         'Title' => 'Varchar(255)',
     ];
 
+    private static $casting = [
+        "CalculatedTitle" => 'Varchar',
+    ];
+
     private static $indexes = [
         'Title' => 'unique("Title, ClassName")',
     ];
@@ -26,5 +30,9 @@ class TitleDataObject extends DataObject
     ];
 
     // NOTE: we do not use default_sort, because that can't be overridden.
-
+    
+    public function CalculatedTitle(): string
+    {
+        return $this->Title ? $this->Title : '';
+    }
 }
