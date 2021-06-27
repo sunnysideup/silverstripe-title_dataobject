@@ -3,12 +3,10 @@
 namespace Sunnysideup\TitleDataObject\Traits;
 
 use SilverStripe\Core\Convert;
-use SilverStripe\ORM\DataObject;
 use SilverStripe\ORM\DB;
 
 trait FindOrCreate
 {
-
     /**
      * to prevent racing conditions ...
      *

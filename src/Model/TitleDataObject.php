@@ -2,9 +2,7 @@
 
 namespace Sunnysideup\TitleDataObject\Model;
 
-use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DataObject;
-use SilverStripe\ORM\DB;
 use Sunnysideup\TitleDataObject\Traits\FindOrCreate;
 
 class TitleDataObject extends DataObject
@@ -18,7 +16,7 @@ class TitleDataObject extends DataObject
     ];
 
     private static $casting = [
-        "CalculatedTitle" => 'Varchar',
+        'CalculatedTitle' => 'Varchar',
     ];
 
     private static $indexes = [
@@ -30,9 +28,9 @@ class TitleDataObject extends DataObject
     ];
 
     // NOTE: we do not use default_sort, because that can't be overridden.
-    
+
     /**
-     * This is here to improve export of has_one related objects that do not have a value. 
+     * This is here to improve export of has_one related objects that do not have a value.
      */
     public function CalculatedTitle(): string
     {
