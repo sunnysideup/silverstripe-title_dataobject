@@ -42,7 +42,7 @@ trait FindOrCreate
 
         $obj = $className::get()->where('LOWER("Title") =\'' . Convert::raw2sql($titleToLower) . '\'');
 
-        if (0 === $obj->count()) {
+        if (! $obj->exists()) {
             if ($showDBAlterationMessage) {
                 DB::alteration_message(
                     'Creating new ' . $className . ' with Title = <strong>' . $title . '</strong>',
