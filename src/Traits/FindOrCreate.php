@@ -5,6 +5,8 @@ namespace Sunnysideup\TitleDataObject\Traits;
 use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DB;
 
+use Sunnysideup\TitleDataObject\Model\TitleDataObject;
+
 trait FindOrCreate
 {
     /**
@@ -32,14 +34,16 @@ trait FindOrCreate
             if ($showDBAlterationMessage) {
                 DB::alteration_message('Found ' . $className . ' with Title = <strong>' . $title . '</strong>');
             }
-
+            /** @return TitleDataObject */
             return self::$cache[$key];
         }
 
         if (! $title) {
+            /** @return TitleDataObject */
             return $className::create();
         }
 
+        /** @var TitleDataObject $obj  */
         $obj = $className::get()->where('LOWER("Title") =\'' . Convert::raw2sql($titleToLower) . '\'');
 
         if (! $obj->exists()) {
