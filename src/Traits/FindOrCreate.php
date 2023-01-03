@@ -33,6 +33,7 @@ trait FindOrCreate
             if ($showDBAlterationMessage) {
                 DB::alteration_message('Found ' . $className . ' with Title = <strong>' . $title . '</strong>');
             }
+
             // @return TitleDataObject
             return self::$cache[$key];
         }
@@ -43,7 +44,7 @@ trait FindOrCreate
         }
 
         /** @var TitleDataObject $obj */
-        $obj = $className::get()->where('LOWER("Title") =\'' . Convert::raw2sql($titleToLower) . '\'');
+        $obj = $className::get()->where('LOWER("Title") =\'' . Convert::raw2sql($titleToLower) . "'");
 
         if (! $obj->exists()) {
             if ($showDBAlterationMessage) {
@@ -52,13 +53,16 @@ trait FindOrCreate
                     'created'
                 );
             }
+
             $obj = $className::create();
         } else {
             if ($showDBAlterationMessage) {
                 DB::alteration_message('Found ' . $className . ' with Title = <strong>' . $title . '</strong>');
             }
+
             $obj = $obj->first();
         }
+
         $obj->Title = $title;
         self::$cache[$key] = $obj;
         $obj->write();
