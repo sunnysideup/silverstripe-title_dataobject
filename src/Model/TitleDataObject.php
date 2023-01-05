@@ -49,7 +49,7 @@ class TitleDataObject extends DataObject
             $fieldLabels = $this->FieldLabels();
             $result->addError(
                 _t(
-                    self::class . '.Title_NOT_EMPTY_REQUIREMENT',
+                    $this->ClassName . '.Title_NOT_EMPTY_REQUIREMENT',
                     $fieldLabels['Title'] . ' needs to be entered'
                 ),
                 'Title_NOT_EMPTY_REQUIREMENT_' . str_replace('\\', '_', $this->ClassName)
