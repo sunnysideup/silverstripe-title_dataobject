@@ -52,7 +52,7 @@ class TitleDataObject extends DataObject
                     self::class . '.Title_NOT_EMPTY_REQUIREMENT',
                     $fieldLabels['Title'] . ' needs to be entered'
                 ),
-                'Title_NOT_EMPTY_REQUIREMENT' . $this->ClassName . '.'
+                'Title_NOT_EMPTY_REQUIREMENT_' . str_replace('\\', '_', $this->ClassName)
             );        
         }
         
@@ -70,7 +70,7 @@ class TitleDataObject extends DataObject
                     $this->ClassName . '.Title_UNIQUE_REQUIREMENT',
                     $fieldLabels['Title'] . ' needs to be unique'
                 ),
-                'Title_UNIQUE_REQUIREMENT' . $this->ClassName. '.'
+                'Title_UNIQUE_REQUIREMENT_' . str_replace('\\', '_', $this->ClassName)
             );
         }
 
