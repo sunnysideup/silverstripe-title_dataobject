@@ -55,9 +55,9 @@ class TitleDataObject extends DataObject
                 'Title_NOT_EMPTY_REQUIREMENT' . $this->ClassName . '.'
             );        
         }
-        $id = (empty($this->ID) ? 0 : $this->ID);
         
         // must be unique
+        $id = (empty($this->ID) ? 0 : $this->ID);
         $exists = self::get()
             ->filter(['Title' => $this->Title, 'ClassName' => $this->ClassName])
             ->exclude(['ID' => $id])
