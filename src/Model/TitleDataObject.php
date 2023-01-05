@@ -20,7 +20,7 @@ class TitleDataObject extends DataObject
     ];
 
     private static $indexes = [
-        'Title' => 'unique("Title, ClassName")',
+        'Title' => ['type' => 'unique', 'columns' => ['Title', 'ClassName']],
     ];
 
     private static $searchable_fields = [
@@ -34,6 +34,6 @@ class TitleDataObject extends DataObject
      */
     public function CalculatedTitle(): string
     {
-        return $this->Title ? $this->Title : '';
+        return (string) $this->Title;
     }
 }
