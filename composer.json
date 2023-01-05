@@ -1,7 +1,7 @@
 {
     "name": "sunnysideup/title_dataobject",
     "type": "silverstripe-vendormodule",
-    "description": "An abstract like class for creating Title only Data Objects in a simple and efficient manner to for example add a category to Business.",
+    "description": "An abstract like class for creating Title only Data Objects in a simple and efficient manner to, for example, add a category to a Product.",
     "keywords": [
         "Silverstripe-CMS",
         "CMS",
@@ -25,7 +25,7 @@
         "silverstripe/recipe-cms": "^4.4"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,  
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Sunnysideup\\TitleDataObject\\": "src/"
