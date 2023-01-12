@@ -36,14 +36,14 @@ class TitleDataObject extends DataObject
     {
         return (string) $this->Title;
     }
-    
+
     /**
      * @see: https://stackoverflow.com/questions/63227834/return-self-for-the-return-type-of-a-function-inside-a-php-trait
      */
     public function validate()
     {
         $result = parent::validate();
-        
+
         // must have a value
         if (! $this->Title) {
             $fieldLabels = $this->FieldLabels();
@@ -53,9 +53,9 @@ class TitleDataObject extends DataObject
                     $fieldLabels['Title'] . ' needs to be entered'
                 ),
                 'Title_NOT_EMPTY_REQUIREMENT_' . str_replace('\\', '_', $this->ClassName)
-            );        
+            );
         }
-        
+
         // must be unique
         $id = (empty($this->ID) ? 0 : $this->ID);
         $exists = self::get()
@@ -76,6 +76,4 @@ class TitleDataObject extends DataObject
 
         return $result;
     }
-    
-    
 }
