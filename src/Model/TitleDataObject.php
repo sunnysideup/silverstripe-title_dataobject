@@ -5,6 +5,11 @@ namespace Sunnysideup\TitleDataObject\Model;
 use SilverStripe\ORM\DataObject;
 use Sunnysideup\TitleDataObject\Traits\FindOrCreate;
 
+/**
+ * Class \Sunnysideup\TitleDataObject\Model\TitleDataObject
+ *
+ * @property string $Title
+ */
 class TitleDataObject extends DataObject
 {
     use FindOrCreate;
