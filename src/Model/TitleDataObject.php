@@ -6,7 +6,7 @@ use SilverStripe\ORM\DataObject;
 use Sunnysideup\TitleDataObject\Traits\FindOrCreate;
 
 /**
- * Class \Sunnysideup\TitleDataObject\Model\TitleDataObject
+ * Class \Sunnysideup\TitleDataObject\Model\TitleDataObject.
  *
  * @property string $Title
  */
