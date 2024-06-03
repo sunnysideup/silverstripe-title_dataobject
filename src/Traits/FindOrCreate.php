@@ -13,14 +13,14 @@ trait FindOrCreate
      *
      * @var array
      */
-    protected static $cache = [];
+    protected static $cache_for_find_or_create = [];
 
     /**
      * see README.md for usage ...
      *
      * @param bool $showDBAlterationMessage
      *
-     * @return TitleDataObject
+     * @return static
      */
     public static function find_or_create(string $title, ?bool $showDBAlterationMessage = false)
     {
@@ -29,13 +29,13 @@ trait FindOrCreate
 
         $className = static::class;
         $key = $className . '_' . $titleToLower;
-        if (isset(self::$cache[$key])) {
+        if (isset(self::$cache_for_find_or_create[$key])) {
             if ($showDBAlterationMessage) {
                 DB::alteration_message('Found ' . $className . ' with Title = <strong>' . $title . '</strong>');
             }
 
             // @return TitleDataObject
-            return self::$cache[$key];
+            return self::$cache_for_find_or_create[$key];
         }
 
         if (! $title) {
@@ -64,8 +64,8 @@ trait FindOrCreate
         }
 
         $obj->Title = $title;
-        self::$cache[$key] = $obj;
         $obj->write();
+        self::$cache_for_find_or_create[$key] = $obj;
 
         return $obj;
     }
