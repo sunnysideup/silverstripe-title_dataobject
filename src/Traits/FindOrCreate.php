@@ -18,8 +18,6 @@ trait FindOrCreate
     /**
      * see README.md for usage ...
      *
-     * @param bool $showDBAlterationMessage
-     *
      * @return static
      */
     public static function find_or_create(string $title, ?bool $showDBAlterationMessage = false)
@@ -38,7 +36,7 @@ trait FindOrCreate
             return self::$cache_for_find_or_create[$key];
         }
 
-        if (! $title) {
+        if ($title === '' || $title === '0') {
             // @return TitleDataObject
             return $className::create();
         }
