@@ -2,6 +2,7 @@
 
 namespace Sunnysideup\TitleDataObject\Model;
 
+use Override;
 use SilverStripe\ORM\DataObject;
 use Sunnysideup\TitleDataObject\Traits\FindOrCreate;
 
@@ -45,6 +46,7 @@ class TitleDataObject extends DataObject
     /**
      * @see: https://stackoverflow.com/questions/63227834/return-self-for-the-return-type-of-a-function-inside-a-php-trait
      */
+    #[Override]
     public function validate()
     {
         $result = parent::validate();
