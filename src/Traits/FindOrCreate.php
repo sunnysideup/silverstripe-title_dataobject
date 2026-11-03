@@ -2,7 +2,6 @@
 
 namespace Sunnysideup\TitleDataObject\Traits;
 
-use SilverStripe\Core\Convert;
 use SilverStripe\ORM\DB;
 use Sunnysideup\TitleDataObject\Model\TitleDataObject;
 
@@ -42,7 +41,7 @@ trait FindOrCreate
         }
 
         /** @var TitleDataObject $obj */
-        $obj = $className::get()->where('LOWER("Title") =\'' . Convert::raw2sql($titleToLower) . "'");
+        $obj = $className::get()->where(['LOWER("Title") = ?' => $titleToLower]);
 
         if (! $obj->exists()) {
             if ($showDBAlterationMessage) {
